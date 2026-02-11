@@ -1,7 +1,7 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* This is the "magic" line that prevents overflow */
     font-family: 'Poppins', sans-serif;
 }
 body{
@@ -70,7 +70,7 @@ font-weight: 400;
 margin-top: -10px;
 }
 .col img {
-    width: 40px;
+    width: 35px;
     margin-right: 10px;
 }
 .humidity, .wind{
@@ -134,4 +134,91 @@ margin-top: -10px;
     width: 55px;
 }
 
+}
+.intro-text {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}
+
+.intro-text h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.intro-text p {
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Fix for the details section gap */
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* Better than a fixed 170px gap */
+    margin-top: 50px;
+    width: 100%;
+}
+/* Responsive adjustments for 320px and up */
+@media (max-width: 500px) {
+    .card {
+        width: 95%; /* Give it a tiny bit more room on small screens */
+        padding: 30px 15px;
+    }
+
+    .intro-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .intro-text p {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    .weather h1 {
+        font-size: 55px;
+    }
+
+    .weather h2 {
+        font-size: 28px;
+    }
+
+    .details {
+        margin-top: 30px;
+        gap: 10px; /* Small gap for safety */
+    }
+
+    .col {
+        font-size: 14px; /* Slightly smaller text for humidity/wind labels */
+    }
+
+    .col img {
+        width: 25px;
+    }
+}
+
+/* Extra small device optimization (320px - 380px) */
+@media (max-width: 380px) {
+    .search input {
+        padding: 10px 15px;
+        font-size: 14px;
+        height: 50px;
+    }
+
+    .search button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .weather img {
+        width: 120px; /* Scale down the main weather icon */
+    }
+}
+.weather-icon {
+    width: 170px;         /* Base size */
+    max-width: 80%;      /* Safety net: never exceeds 80% of the card width */
+    margin-top: 30px;
+    display: block;      /* Helps with centering */
+    margin-left: auto;
+    margin-right: auto;
 }
