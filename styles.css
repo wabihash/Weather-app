@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background-color: #222;
+}
+.card{
+    width: 90%;
+    max-width: 500px;
+    background: linear-gradient(135deg,#00feba,#5b548a);
+    margin: 50px auto 0;
+     color: #fff;
+     border-radius: 20px;
+     padding: 40px 35px;
+     text-align: center;
+}
+.search{
+    width: 100%;
+ display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 15px;
+}
+.search input{
+border: none;
+outline: none;
+background-color: #ebfffc;
+border-radius: 20px;
+padding: 15px 25px;
+height: 60px;
+flex: 1;
+margin-right: 15px;
+font-size: 18px;
+}
+.search button{
+border: none;
+outline: none;
+background-color: #ebffeb;
+border-radius:50%;
+cursor: pointer;
+width: 62px;
+height: 62px;
+padding: 10px;
+}
+.search button img{
+    width: 16px;
+}
+.details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 170px;
+    margin-top: 50px;
+}
+.col{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+.weather h1{
+font-size: 80px;
+font-weight: 500;
+}
+.weather h2 {
+font-size: 45px;
+font-weight: 400;
+margin-top: -10px;
+}
+.col img {
+    width: 40px;
+    margin-right: 10px;
+}
+.humidity, .wind{
+    font-size: 20px;
+    /* margin-top: -px; */
+}
+.weather{
+    display: none;
+}
+.error{
+    font-size: 14px;
+    text-align: left;
+    display: none;
+}
+
+@media (max-width: 500px) {
+
+    .card {
+        padding: 30px 20px;
+    }
+
+    .search input {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .details {
+        gap: 40px;   /* reduce big gap */
+        flex-direction: column; /* stack on small screen */
+        margin-top: 30px;
+    }
+
+    .weather h1 {
+        font-size: 60px;
+    }
+
+    .weather h2 {
+        font-size: 30px;
+    }
+    .weather img{
+        width: 170px;
+    }
+
+    .col img {
+        width: 30px;
+    }
+
+    .humidity, .wind {
+        font-size: 16px;
+    }
+}
+@media(max-width:390px){
+     .search input {
+        padding: 5px 1px;
+        font-size: 15px;
+        margin-right: 5px;
+        height: 55px;
+}
+.search button{
+    height: 55px;
+    width: 55px;
+}
+
+}
