@@ -250,6 +250,39 @@ unitSwitch.addEventListener("change", () => {
     if (currentCity) checkWeather(currentCity);
 });
 
+/**
+ * Share Weather Logic
+ */
+async function shareWeather() {
+    if (!currentCity) return;
+    
+    const tempText = document.querySelector('.temp').innerHTML;
+    const shareText = `Check out the weather in ${currentCity}: ${tempText}! Shared via SkyCast Weather Station.`;
+    const shareUrl = window.location.href;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'SkyCast Weather',
+                text: shareText,
+                url: shareUrl
+            });
+        } catch (err) {
+            console.error("Share failed:", err);
+        }
+    } else {
+        // Fallback: Copy to clipboard
+        try {
+            await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+            alert("Weather summary copied to clipboard! 📋");
+        } catch (err) {
+            console.error("Copy failed:", err);
+        }
+    }
+}
+
+document.querySelector('.share-btn').addEventListener('click', shareWeather);
+
 // Close autocomplete on click away
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.search-input-container')) {
