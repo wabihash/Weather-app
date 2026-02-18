@@ -3,50 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyCast - Real-time weather updates with 5-day forecasts, geolocation, and dynamic weather backgrounds. Stay ahead of the storm!">
+    <meta name="keywords" content="weather, real-time weather, weather forecast, skycast, temperature, geolocation weather">
+    <meta name="author" content="SkyCast Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://weather-app-wabi.vercel.app/">
+    <meta property="og:title" content="SkyCast | Real-Time Weather & Forecasts">
+    <meta property="og:description" content="Get instant weather updates, humidity levels, and wind speeds for your city.">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#5b548a">
+
     <link rel="stylesheet" href="styles.css">
-    <title>SkyCast | Real-Time Weather</title>
+    <title>SkyCast | Real-Time Weather & 5-Day Forecast</title>
 </head>
 <body>
 
-    <div class="intro-text">
-        <h1>SkyCast</h1>
-        <p>Enter a city name to get instant weather updates, humidity levels, and wind speeds.</p>
+    <div class="dev-profile">
+        <img src="photo_2026-02-18_03-46-27 k.jpg" alt="Wabi Dagim" class="profile-img">
+        <p>Developed by <strong>Wabi Dagim</strong></p>
+        <div class="social-links">
+            <a href="https://t.me/focusrehobot" target="_blank" title="Telegram" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+            </a>
+            <a href="https://www.facebook.com/share/r/1Duh6Qnu1b/" target="_blank" title="Facebook" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+            </a>
+            <a href="https://linkedin.com/in/focusrehobot" target="_blank" title="LinkedIn" class="social-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn">
+            </a>
+        </div>
     </div>
 
+    <header class="intro-text">
+        <h1>SkyCast</h1>
+        <p>Get instant weather updates, 5-day forecasts, and precise location-based weather.</p>
+        
+        <div class="unit-toggle">
+            <span class="unit-label active" data-unit="metric">°C</span>
+            <label class="switch">
+                <input type="checkbox" id="unit-switch">
+                <span class="slider round"></span>
+            </label>
+            <span class="unit-label" data-unit="imperial">°F</span>
+        </div>
+
+        <div class="favorites-bar">
+            <!-- Pinned cities will appear here -->
+        </div>
+    </header>
+
     <main class="card">
-        <div class="search">
-            <input type="text" placeholder="Enter city name..." spellcheck="false">
-            <button title="Search"><img src="search-line (1).svg" alt="search-icon"></button>
-        </div>
+        <section class="search" role="search">
+            <div class="search-input-container">
+                <input type="text" placeholder="Enter city name..." aria-label="City Search" spellcheck="false" autocomplete="off">
+                <div class="autocomplete-results"></div>
+            </div>
+            <button class="search-btn" title="Search weather"><img src="search-line (1).svg" alt="search-icon"></button>
+            <button class="location-btn" title="Get current location weather">📍</button>
+            <button class="fav-btn" title="Pin city">⭐</button>
+        </section>
 
-        <div class="error">
+        <section class="loading" aria-hidden="true">
+            <div class="spinner"></div>
+            <p>Fetching weather data...</p>
+        </section>
+
+        <section class="error" aria-live="polite">
             <p>⚠ Invalid city name. Please try again.</p>
-        </div>
+        </section>
 
-        <div class="weather">
+        <section class="weather">
+            <div class="current-time" id="clock">--:-- --</div>
             <img src="" alt="weather-condition" class="weather-icon">
             <h1 class="temp">--°C</h1>
             <h2 class="city">Search a City</h2>
             
             <div class="details">
                 <div class="col">
-                    <img src="https://cdn-icons-png.flaticon.com/256/6393/6393330.png" alt="humidity">
+                    <img src="https://cdn-icons-png.flaticon.com/256/6393/6393330.png" alt="humidity icon">
                     <div>
                         <p class="humidity">--%</p>
                         <p>Humidity</p>
                     </div>
                 </div>
                 <div class="col">
-                    <img src="https://cdn-icons-png.flaticon.com/512/54/54298.png" alt="wind">
+                    <img src="https://cdn-icons-png.flaticon.com/512/54/54298.png" alt="wind speed icon">
                     <div>
                         <p class="wind">-- km/hr</p>
                         <p>Wind Speed</p>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="aqi-display">
+                <div class="aqi-card">
+                    <p>Air Quality</p>
+                    <span class="aqi-value">--</span>
+                    <p class="aqi-desc">--</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="forecast">
+            <h3>5-Day Forecast</h3>
+            <div class="forecast-container">
+                <!-- Forecast items will be injected here -->
+            </div>
+        </section>
     </main>
 
-    <script src="main.js"></script>
+    <footer class="footer-info">
+        <div class="about-section">
+            <h3>About SkyCast</h3>
+            <p>SkyCast is a modern, real-time weather platform built to keep you ahead of the weather. Developed by <strong>Wabi Dagim</strong>, it combines precision data with a premium user experience.</p>
+        </div>
+        <p>&copy; 2026 SkyCast Weather Hub. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js" defer></script>
 </body>
 </html>

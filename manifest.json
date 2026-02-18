@@ -1,0 +1,16 @@
+{
+  "name": "SkyCast Weather",
+  "short_name": "SkyCast",
+  "description": "Real-time weather updates and forecasts.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#222222",
+  "theme_color": "#5b548a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/414/414825.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
