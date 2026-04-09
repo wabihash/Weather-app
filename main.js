@@ -60,18 +60,6 @@ function hasValidApiKey() {
     return Boolean(apiKey);
 }
 
-function ensureApiKey() {
-    if (hasValidApiKey()) return true;
-
-    const entered = window.prompt("Enter your OpenWeatherMap API key to enable live weather:");
-    const cleaned = (entered || "").trim();
-    if (!cleaned) return false;
-
-    localStorage.setItem("owm_api_key", cleaned);
-    apiKey = cleaned;
-    return true;
-}
-
 function isCoordinateQuery(query) {
     return typeof query === "object" && query !== null && "lat" in query && "lon" in query;
 }
@@ -87,7 +75,7 @@ function setText(element, text) {
 }
 
 function showApiKeyMissingMessage() {
-    const message = "API key missing. Add window.__OWM_API_KEY__ in index.html or enter it when prompted.";
+    const message = "API key missing. Set window.__OWM_API_KEY__ in index.html to enable live weather data.";
     const errorText = errorDiv?.querySelector("p");
     if (errorText) {
         errorText.textContent = message;
@@ -225,7 +213,7 @@ function updateWeatherUI(data) {
 async function checkWeather(query) {
     if (!query || (typeof query === "string" && !query.trim())) return;
 
-    if (!ensureApiKey()) {
+    if (!hasValidApiKey()) {
         showApiKeyMissingMessage();
         return;
     }
