@@ -1,4 +1,4 @@
-const apiKey = window.__OWM_API_KEY__ || "2809084e3c5fe5926182b5e1ac73a834";
+const apiKey = (window.__OWM_API_KEY__ || "").trim();
 const apiUrl = "https://api.openweathermap.org/data/2.5/";
 
 const searchBox = document.querySelector(".search input");
@@ -40,6 +40,7 @@ let cityTimezoneOffset = 0;
 let deferredPrompt;
 let debounceTimer;
 let favorites = JSON.parse(localStorage.getItem("favCities") || "[]");
+const hasApiKey = Boolean(apiKey);
 
 function isCoordinateQuery(query) {
     return typeof query === "object" && query !== null && "lat" in query && "lon" in query;
@@ -53,6 +54,17 @@ function setVisible(element, shouldShow, displayType = "block") {
 function setText(element, text) {
     if (!element) return;
     element.textContent = text;
+}
+
+function showApiKeyMissingMessage() {
+    const message = "API key missing. Set window.__OWM_API_KEY__ in index.html to enable live weather data.";
+    const errorText = errorDiv?.querySelector("p");
+    if (errorText) {
+        errorText.textContent = message;
+    }
+    setVisible(loadingDiv, false);
+    setVisible(weatherDiv, false);
+    setVisible(errorDiv, true);
 }
 
 function toWeatherUrl(endpoint, query) {
@@ -182,6 +194,11 @@ function updateWeatherUI(data) {
 
 async function checkWeather(query) {
     if (!query || (typeof query === "string" && !query.trim())) return;
+
+    if (!hasApiKey) {
+        showApiKeyMissingMessage();
+        return;
+    }
 
     setVisible(errorDiv, false);
     setVisible(weatherDiv, false);
@@ -411,6 +428,12 @@ function initialize() {
     setupEventListeners();
     setupInstallPrompt();
     registerServiceWorker();
+
+    if (!hasApiKey) {
+        showApiKeyMissingMessage();
+        return;
+    }
+
     checkWeather(localStorage.getItem("lastCity") || "New York");
 }
 
