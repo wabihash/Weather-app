@@ -1,8 +1,14 @@
-# SkyCast Weather App
+# SkyCast - Premium Weather Experience for Web & Mobile
 
-A polished weather web app built for real-world use and portfolio presentation.
+Client-ready weather app focused on speed, clarity, and visual polish for real-world daily decisions.
 
 **Live Demo:** https://weather-app-wabi.vercel.app/
+
+**Freelance Pitch Tagline:** I build clean, production-minded frontend apps that feel premium and are easy to scale for business needs.
+
+## Product demo (GIF)
+
+![SkyCast demo flow](assets/screenshots/skycast-demo.gif)
 
 ## What problem this solves
 
@@ -72,8 +78,16 @@ python -m http.server 5500
 
 ## Notes for API setup
 
-The app reads weather API key from `window.__OWM_API_KEY__` when available, with a built-in fallback currently present in `main.js`.
-For production freelancing work, use a restricted key and domain limits in OpenWeatherMap.
+The app reads weather API key from `window.__OWM_API_KEY__`.
+To run live data locally, define it in `index.html` before loading `main.js`:
+
+```html
+<script>
+  window.__OWM_API_KEY__ = "YOUR_OPENWEATHERMAP_KEY";
+</script>
+```
+
+For production freelancing work, use a restricted key (domain-limited) in OpenWeatherMap.
 
 ## Folder structure
 
