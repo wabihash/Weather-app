@@ -1,4 +1,4 @@
-const apiKey = (window.__OWM_API_KEY__ || "").trim();
+let apiKey = "";
 const apiUrl = "https://api.openweathermap.org/data/2.5/";
 
 const searchBox = document.querySelector(".search input");
@@ -40,7 +40,37 @@ let cityTimezoneOffset = 0;
 let deferredPrompt;
 let debounceTimer;
 let favorites = JSON.parse(localStorage.getItem("favCities") || "[]");
-const hasApiKey = Boolean(apiKey);
+
+function resolveApiKey() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromQuery = (urlParams.get("owmApiKey") || "").trim();
+    const fromWindow = (window.__OWM_API_KEY__ || "").trim();
+    const fromStorage = (localStorage.getItem("owm_api_key") || "").trim();
+
+    if (fromQuery) {
+        localStorage.setItem("owm_api_key", fromQuery);
+        return fromQuery;
+    }
+
+    return fromWindow || fromStorage;
+}
+
+function hasValidApiKey() {
+    apiKey = resolveApiKey();
+    return Boolean(apiKey);
+}
+
+function ensureApiKey() {
+    if (hasValidApiKey()) return true;
+
+    const entered = window.prompt("Enter your OpenWeatherMap API key to enable live weather:");
+    const cleaned = (entered || "").trim();
+    if (!cleaned) return false;
+
+    localStorage.setItem("owm_api_key", cleaned);
+    apiKey = cleaned;
+    return true;
+}
 
 function isCoordinateQuery(query) {
     return typeof query === "object" && query !== null && "lat" in query && "lon" in query;
@@ -57,7 +87,7 @@ function setText(element, text) {
 }
 
 function showApiKeyMissingMessage() {
-    const message = "API key missing. Set window.__OWM_API_KEY__ in index.html to enable live weather data.";
+    const message = "API key missing. Add window.__OWM_API_KEY__ in index.html or enter it when prompted.";
     const errorText = errorDiv?.querySelector("p");
     if (errorText) {
         errorText.textContent = message;
@@ -195,7 +225,7 @@ function updateWeatherUI(data) {
 async function checkWeather(query) {
     if (!query || (typeof query === "string" && !query.trim())) return;
 
-    if (!hasApiKey) {
+    if (!ensureApiKey()) {
         showApiKeyMissingMessage();
         return;
     }
@@ -429,7 +459,7 @@ function initialize() {
     setupInstallPrompt();
     registerServiceWorker();
 
-    if (!hasApiKey) {
+    if (!hasValidApiKey()) {
         showApiKeyMissingMessage();
         return;
     }
