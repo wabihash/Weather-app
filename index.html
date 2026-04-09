@@ -14,7 +14,6 @@
     <meta property="og:description" content="Get instant weather updates, humidity levels, and wind speeds for your city.">
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#22577a">
     <meta name="google-site-verification" content="W7-lI1L9bBqxa90WExlg90jQeohKh1E_nGx_jYKeM0I" />
 
     <link rel="icon" type="image/png" href="https://openweathermap.org/img/wn/02d@2x.png">
@@ -51,8 +50,8 @@
         
         <div class="unit-toggle">
             <span class="unit-label active" data-unit="metric">°C</span>
-            <label class="switch">
-                <input type="checkbox" id="unit-switch">
+            <label class="switch" for="unit-switch">
+                <input type="checkbox" id="unit-switch" aria-label="Toggle temperature unit" title="Toggle temperature unit">
                 <span class="slider round"></span>
             </label>
             <span class="unit-label" data-unit="imperial">°F</span>
@@ -62,7 +61,7 @@
             <!-- Pinned cities will appear here -->
         </div>
 
-        <button id="install-button" class="install-btn" style="display: none;">
+        <button id="install-button" class="install-btn">
             <span>📲 Install App</span>
         </button>
     </header>
